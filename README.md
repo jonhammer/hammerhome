@@ -13,7 +13,7 @@ The motion_lights.py (`app_daemon/conf/apps/motion_lights.py`) automation was th
 - Room-specific time of day cutoffs
 - Room-specific sun elevation cutoffs
 - A single automation that handles all the motion sensors/lights in the house
-- Ability to set an input_boolean to disable the automation in a particular room (optional, see `configuration/home-assistant/entities/input_boolean/configuration.yaml`)
+- Ability to set an input_boolean to disable the automation in a particular room (optional, see `home-assistant/entities/input_boolean/configuration.yaml`)
 
 Several of these requirements can be met using existing public blueprints (when I first started with HA, I used [this](https://community.home-assistant.io/t/turn-on-light-switch-scene-script-or-group-based-on-motion-illuminance-sun-more-conditions/257085) one), but none that I found was able to satisfy all of them, and writing and modifying YAML based automations as a Python developer was extremely cumbersome.
 
@@ -84,10 +84,10 @@ The automation will automatically detect motion sensors and lights based on the 
 - lights: `light.room_name_lights`, e.g., `light.living_room_lights` or `light.workshop_lights` (personally I configure these as [zigbee2mqtt groups](https://www.zigbee2mqtt.io/guide/usage/groups.html)).
 
 ## Timers
-Each room should have a timer entity configured. HA handles the timers, which simplifies the code and allows appdaemon to be re-started without impacting light automations. The timer entity should be named `timer.room_name_light_timer` e.g., `timer.living_room_light_timer`. See the `configuration/home-assistant/entities/timer/configuration.yaml` file for an example of how to configure a timer entity.
+Each room should have a timer entity configured. HA handles the timers, which simplifies the code and allows appdaemon to be re-started without impacting light automations. The timer entity should be named `timer.room_name_light_timer` e.g., `timer.living_room_light_timer`. See the `home-assistant/entities/timer/configuration.yaml` file for an example of how to configure a timer entity.
 
 Appdaemon itself does not keep track of the timers, which makes the code much simpler. `motion_lights.py` handles motion events, turning on lights, and starting/re-starting HA timers. `lights_timer_finsihed.py` handles turning off lights when timers finish.
 
 ## Overrides
-The automation will not turn on lights if the `input_boolean.room_name_light_override` entity is set to `on`. See the `configuration/home-assistant/entities/input_boolean/configuration.yaml` for examples of these entities.
+The automation will not turn on lights if the `input_boolean.room_name_light_override` entity is set to `on`. See the `home-assistant/entities/input_boolean/configuration.yaml` for examples of these entities.
 
