@@ -3,7 +3,7 @@ This is the public repository for my home assistant deployment.
 
 When I first started with HA I was inspired by many of the public configurations found [here](https://github.com/frenck/awesome-home-assistant#public-configurations). If you are just starting out those will be of more use generally speaking, but my repo will be of particular interest to those who wish to use [appdaemon](https://appdaemon.readthedocs.io/en/latest/) and python to control their home.
 
-My most interesting automation is my appdaemon motion lights automation (see [appdaemon-motion-triggered-lights](#appdaemon-motion-triggered-lights) below). I use appdaemon for most of my automations (other than extremely basic ones), so there are a few more in there that may be useful for people learning appdaemon.
+My most interesting automation is my appdaemon motion lights automation (see [appdaemon-motion-triggered-lights](#appdaemon-motion-triggered-lights) below). I use appdaemon for most of my automations (other than extremely basic ones), so there are a few more in there that may be useful for people learning appdaemon. You can find all my appdaemon automations [here](https://github.com/jonhammer/hammerhome/tree/main/app_daemon/conf/apps).
 
 ## Structure
 Important stuff:
