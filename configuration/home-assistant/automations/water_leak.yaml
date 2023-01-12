@@ -1,0 +1,15 @@
+- id: alert_for_basement_water_leak
+  alias: Send alert for basement water leak
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.laundry_room_water_leak_sensor_0_water_leak
+      from: 'off'
+      to: 'on'
+  action:
+    - service: notify.pushover
+      data:
+        message: Basement water leak detected
+        title: Basement water leak detected
+        data:
+          priority: 1

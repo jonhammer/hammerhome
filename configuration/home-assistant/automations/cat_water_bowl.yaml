@@ -1,0 +1,13 @@
+- id: cat_water_bowl
+  alias: Send alert when cat is out of water
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.workshop_water_leak_sensor_0_water_leak
+      from: 'on'
+      to: 'off'
+  action:
+    - service: notify.pushover
+      data:
+        message: Cat water bowl empty
+        title: Cat water bowl empty

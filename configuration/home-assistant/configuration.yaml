@@ -1,0 +1,19 @@
+# Load      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzMTEyMDdlZjI3N2Y0NDAyOTMxZjAxMDMzYjQ1NGFiZCIsImlhdCI6MTY3MjE3NTk5MiwiZXhwIjoxOTg3NTM1OTkyfQ.4B9bPndCy-BGPiYkhMHrfK2tkSSKseS6IeEQLgi80bIs default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include_dir_merge_list automations
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+timer: !include entities/timer/configuration.yaml
+input_boolean: !include entities/input_boolean/configuration.yaml
+input_number: !include entities/input_number/configuration.yaml
+input_text: !include entities/input_text/configuration.yaml

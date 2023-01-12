@@ -1,0 +1,189 @@
+- name: mudroom_dim
+  entities:
+    light.mudroom_lights:
+      state: 'on'
+      brightness_pct: 1
+- name: mudroom_normal
+  entities:
+    light.mudroom_lights:
+      state: 'on'
+      brightness_pct: 100
+- name: living_room_dim
+  entities:
+    light.living_room_lights:
+      state: 'on'
+      brightness_pct: 1
+- name: living_room_normal
+  entities:
+    light.living_room_lights:
+      state: 'on'
+      brightness_pct: 100
+- name: kitchen_dim
+  entities:
+    light.kitchen_lights:
+      state: 'on'
+      brightness_pct: 1
+- name: kitchen_normal
+  entities:
+    light.kitchen_lights:
+      state: 'on'
+      brightness_pct: 100
+- name: entry_dim
+  entities:
+    light.entry_light_0:
+      state: 'on'
+      brightness_pct: 1
+- name: entry_normal
+  entities:
+    light.entry_light_0:
+      state: 'on'
+      brightness_pct: 100
+- name: downstairs_bathroom_dim
+  entities:
+    light.downstairs_bathroom_lights:
+      state: 'on'
+      brightness_pct: 1
+- name: downstairs_bathroom_normal
+  entities:
+    light.downstairs_bathroom_lights:
+      state: 'on'
+      brightness_pct: 100
+- name: dining_room_dim
+  entities:
+    light.dining_room_lights:
+      state: 'on'
+      brightness_pct: 1
+- name: dining_room_normal
+  entities:
+    light.dining_room_lights:
+      state: 'on'
+      brightness_pct: 100
+- name: bathroom_dim
+  entities:
+    light.bathroom_lights:
+      state: 'on'
+      brightness_pct: 1
+- name: bathroom_normal
+  entities:
+    light.bathroom_lights:
+      state: 'on'
+      brightness_pct: 100
+- name: upstairs_hallway_off
+  entities:
+    light.upstairs_hallway_lights:
+      state: 'off'
+- name: upstairs_hallway_dim
+  entities:
+    light.upstairs_hallway_lights:
+      state: 'on'
+      brightness_pct: 1
+- name: upstairs_hallway_normal
+  entities:
+    light.upstairs_hallway_lights:
+      state: 'on'
+      brightness_pct: 100
+- name: office_dim
+  entities:
+    light.office_lights:
+      state: 'on'
+      brightness_pct: 1
+- name: office_normal
+  entities:
+    light.office_lights:
+      state: 'on'
+      brightness_pct: 50
+- name: office_bright
+  entities:
+    light.office_lights:
+      state: 'on'
+      brightness_pct: 100
+- name: bedroom_dim
+  entities:
+    light.bedroom_lights:
+      state: 'on'
+      brightness: 50
+- name: bedroom_normal
+  entities:
+    light.bedroom_lights:
+      state: 'on'
+      brightness: 127
+- name: bedroom_bright
+  entities:
+    light.bedroom_lights:
+      state: 'on'
+      brightness_pct: 100
+- id: blinds_day
+  name: Office Blinds Day
+  entities:
+    cover.office_blinds_0:
+      current_position: 50
+      battery: 38
+      linkquality: 255
+      position: 50
+      state: open
+      update:
+        state: available
+      update_available: true
+      friendly_name: office_blinds_0
+      supported_features: 15
+    cover.office_blinds_1:
+      current_position: 50
+      battery: 32
+      linkquality: 255
+      position: 50
+      state: open
+      update:
+        state: available
+      update_available: true
+      friendly_name: office_blinds_1
+      supported_features: 15
+- id: blinds_closed
+  name: Office Blinds Closed
+  entities:
+    cover.office_blinds_0:
+      current_position: 0
+      battery: 38
+      linkquality: 255
+      position: 0
+      state: open
+      update:
+        state: available
+      update_available: true
+      friendly_name: office_blinds_0
+      supported_features: 15
+    cover.office_blinds_1:
+      current_position: 0
+      battery: 32
+      linkquality: 255
+      position: 0
+      state: open
+      update:
+        state: available
+      update_available: true
+      friendly_name: office_blinds_1
+      supported_features: 15
+- id: blinds_open
+  name: Office Blinds Open
+  entities:
+    cover.office_blinds_0:
+      current_position: 100
+      battery: 38
+      linkquality: 255
+      position: 100
+      state: open
+      update:
+        state: available
+      update_available: true
+      friendly_name: office_blinds_0
+      supported_features: 15
+    cover.office_blinds_1:
+      current_position: 100
+      battery: 32
+      linkquality: 255
+      position: 100
+      state: open
+      update:
+        state: available
+      update_available: true
+      friendly_name: office_blinds_1
+      supported_features: 15

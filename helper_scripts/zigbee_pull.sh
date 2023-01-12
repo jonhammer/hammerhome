@@ -1,0 +1,1 @@
+scp pi@zigbee:/opt/zigbee2mqtt/data/configuration.yaml /home/jon/hammernet/home_assistant/has_config/zigbee2mqtt/configuration.yaml

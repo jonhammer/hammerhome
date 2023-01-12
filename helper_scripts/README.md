@@ -1,0 +1,1 @@
+These are just a collection of random scripts that I've written to help me with various tasks.  They are not meant to be used by anyone else, but they may have useful bits and pieces in them for use by others.

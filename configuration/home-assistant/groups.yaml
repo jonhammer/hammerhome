@@ -1,0 +1,151 @@
+bedroom_blinds:
+  entities:
+    - cover.front_blinds
+    - cover.back_blinds
+    - cover.jon_blinds
+    - cover.sarah_blinds
+office_blinds:
+  entities:
+    - cover.office_blinds_0
+    - cover.office_blinds_1
+halloween_lights:
+  entities:
+    - light.hue_color_lamp_1
+    - light.hue_color_lamp_1_2
+    - light.hue_color_lamp_3
+living_room_lamps:
+  entities:
+    - light.hue_color_lamp_2
+    - light.hue_color_lamp_2_2
+living_room_lights:
+  entities:
+    - group.living_room_lamps
+    - light.living_room_lights
+# Occupancy groups are mostly unused now that I've migrated to dynamic automation via appdaemon
+back_stairs_occupancy:
+  entities:
+  - binary_sensor.back_stairs_motion_sensor_0_occupancy
+  name: back_stairs occupancy
+basement_occupancy:
+  entities:
+  - binary_sensor.basement_stairs_motion_sensor_0_occupancy
+  - binary_sensor.laundry_room_motion_sensor_0_occupancy
+  - binary_sensor.game_room_motion_sensor_0_occupancy
+  name: basement occupancy
+basement_stairs_occupancy:
+  entities:
+  - binary_sensor.basement_stairs_motion_sensor_0_occupancy
+  name: basement_stairs occupancy
+basement_water_leak:
+  entities:
+  - binary_sensor.laundry_room_water_leak_sensor_0_water_leak
+  - binary_sensor.laundry_room_water_leak_sensor_1_water_leak
+  - binary_sensor.workshop_water_leak_sensor_0_water_leak
+  name: basement water_leak
+bedroom_occupancy:
+  entities:
+  - binary_sensor.bedroom_motion_sensor_0_occupancy
+  - binary_sensor.bedroom_motion_sensor_1_occupancy
+  name: bedroom occupancy
+closet_occupancy:
+  entities:
+  - binary_sensor.closet_motion_sensor_0_occupancy
+  name: closet occupancy
+dining_room_occupancy:
+  entities:
+  - binary_sensor.dining_room_motion_sensor_0_occupancy
+  - binary_sensor.dining_room_motion_sensor_1_occupancy
+  name: dining_room occupancy
+downstairs_occupancy:
+  entities:
+  - binary_sensor.garage_motion_sensor_0_occupancy
+  - binary_sensor.entry_motion_sensor_0_occupancy
+  - binary_sensor.mudroom_motion_sensor_0_occupancy
+  - binary_sensor.mudroom_motion_sensor_1_occupancy
+  - binary_sensor.kitchen_motion_sensor_0_occupancy
+  - binary_sensor.dining_room_motion_sensor_0_occupancy
+  - binary_sensor.dining_room_motion_sensor_1_occupancy
+  - binary_sensor.living_room_motion_sensor_0_occupancy
+  - binary_sensor.office_motion_sensor_0_occupancy
+  name: downstairs occupancy
+entry_occupancy:
+  entities:
+  - binary_sensor.entry_motion_sensor_0_occupancy
+  name: entry occupancy
+game_room_occupancy:
+  entities:
+  - binary_sensor.game_room_motion_sensor_0_occupancy
+  name: game_room occupancy
+garage_occupancy:
+  entities:
+  - binary_sensor.garage_motion_sensor_0_occupancy
+  name: garage occupancy
+kitchen_occupancy:
+  entities:
+  - binary_sensor.kitchen_motion_sensor_0_occupancy
+  name: kitchen occupancy
+laundry_room_occupancy:
+  entities:
+  - binary_sensor.laundry_room_motion_sensor_0_occupancy
+  name: laundry_room occupancy
+laundry_room_water_leak:
+  entities:
+  - binary_sensor.laundry_room_water_leak_sensor_0_water_leak
+  - binary_sensor.laundry_room_water_leak_sensor_1_water_leak
+  name: laundry_room water_leak
+living_room_occupancy:
+  entities:
+  - binary_sensor.living_room_motion_sensor_0_occupancy
+  name: living_room occupancy
+mudroom_occupancy:
+  entities:
+  - binary_sensor.mudroom_motion_sensor_1_occupancy
+  - binary_sensor.mudroom_motion_sensor_0_occupancy
+  name: mudroom occupancy
+office_occupancy:
+  entities:
+  - binary_sensor.office_motion_sensor_0_occupancy
+  name: office occupancy
+upstairs_hallway_occupancy:
+  entities:
+  - binary_sensor.upstairs_hallway_motion_sensor_0_occupancy
+  - binary_sensor.upstairs_hallway_motion_sensor_1_occupancy
+  - binary_sensor.back_stairs_motion_sensor_0_occupancy
+  name: upstairs_hallway occupancy
+upstairs_occupancy:
+  entities:
+  - binary_sensor.upstairs_hallway_motion_sensor_0_occupancy
+  - binary_sensor.bedroom_motion_sensor_0_occupancy
+  - binary_sensor.closet_motion_sensor_0_occupancy
+  name: upstairs occupancy
+workshop_water_leak:
+  entities:
+  - binary_sensor.workshop_water_leak_sensor_0_water_leak
+  name: workshop water_leak
+light_overrides:
+  entities:
+  - input_boolean.living_room_override
+  - input_boolean.stairs_light_override
+  - input_boolean.back_stairs_light_override
+  - input_boolean.attic_light_override
+  - input_boolean.basement_light_override
+  - input_boolean.laundry_room_light_override
+  - input_boolean.game_room_light_override
+  - input_boolean.workshop_light_override
+  - input_boolean.garage_light_override
+  - input_boolean.entry_light_override
+  - input_boolean.mudroom_light_override
+  - input_boolean.kitchen_light_override
+  - input_boolean.dining_room_light_override
+  - input_boolean.living_room_light_override
+  - input_boolean.office_light_override
+  - input_boolean.pantry_light_override
+  - input_boolean.mudroom_closet_light_override
+  - input_boolean.upstairs_hallway_light_override
+  - input_boolean.bedroom_light_override
+  - input_boolean.bathroom_light_override
+  - input_boolean.guest_bathroom_light_override
+  - input_boolean.sarah_office_light_override
+  - input_boolean.cat_room_light_override
+  - input_boolean.guest_room_light_override
+  - input_boolean.closet_room_light_override

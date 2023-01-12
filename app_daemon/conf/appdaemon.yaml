@@ -1,0 +1,10 @@
+appdaemon:
+  time_zone: America/New_York
+  latitude: 41.7486
+  longitude: -72.7609
+  elevation: 0
+  plugins:
+    HASS:
+      type: hass
+      ha_url: http://172.29.99.100:8123
+      token: "REDACTED"

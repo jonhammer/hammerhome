@@ -1,0 +1,25 @@
+- id: pantry_door_open_turn_on_lights
+  alias: Turn on pantry lights when door open
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.pantry_door_sensor_contact
+      from: 'off'
+      to: 'on'
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.pantry_light_0
+      data:
+        brightness_pct: 100
+
+- id: pantry_door_close_turn_off_lights
+  alias: Turn off pantry lights when door closed
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.pantry_door_sensor_contact
+      from: 'on'
+      to: 'off'
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.pantry_light_0

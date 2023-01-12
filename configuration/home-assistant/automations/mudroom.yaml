@@ -1,0 +1,25 @@
+- id: mudroom_closet_door_open_turn_on_lights
+  alias: Turn on mudroom closet lights when door opened
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.mudroom_closet_door_sensor_contact
+      from: 'off'
+      to: 'on'
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.mudroom_closet_lights
+      data:
+        brightness_pct: 100
+
+- id: mudroom_closet_door_close_turn_off_lights
+  alias: Turn off mudroom closet lights when door closed
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.mudroom_closet_door_sensor_contact
+      from: 'on'
+      to: 'off'
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.mudroom_closet_lights
