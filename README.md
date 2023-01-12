@@ -3,9 +3,19 @@ This is the public repository for my home assistant deployment.
 
 When I first started with HA I was inspired by many of the public configurations found [here](https://github.com/frenck/awesome-home-assistant#public-configurations). If you are just starting out those will be of more use generally speaking, but my repo will be of particular interest to those who wish to use [appdaemon](https://appdaemon.readthedocs.io/en/latest/) and python to control their home.
 
-My most interesting automation is my appdaemon motion lights automation, detailed below.
+My most interesting automation is my appdaemon motion lights automation (see [appdaemon-motion-triggered-lights](#appdaemon-motion-triggered-lights) below). I use appdaemon for most of my automations (other than extremely basic ones), so there are a few more in there that may be useful for people learning appdaemon.
 
-# motion_lights.py
+## Structure
+Important stuff:
+- app_daemon - Appdaemon automations
+- home-assistant - HA config
+
+Other, less useful stuff:
+- alerts - TICKScript alerts, only useful if you push your HA data to influxdb.
+- helper_scripts - Various small scripts I use or have used for managing my HA deployment.
+- lib - Python representations for a home. Mostly I use this when creating lots of dashboards or automations and want to automate the process.
+
+## Appdaemon motion triggered lights
 The motion_lights.py (`app_daemon/conf/apps/motion_lights.py`) automation was the main motivation behind making this repo public, as I wasn't able to find an existing automation to handle all of my requirements for controlling my lights in my home. These requirements include:
 
 - Ability to dynamically add motion sensors and lights without any configuration changes. I often found myself adding new motion sensors to cover blind spots as well as deleting + re-pairing misbehaving devices. **As long as devices follow a naming standard, no changes or restarts are required for them to immediately start working with the existing automations**
