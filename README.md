@@ -27,6 +27,8 @@ The motion_lights.py (`app_daemon/conf/apps/motion_lights.py`) automation was th
 
 Several of these requirements can be met using existing public blueprints (when I first started with HA, I used [this](https://community.home-assistant.io/t/turn-on-light-switch-scene-script-or-group-based-on-motion-illuminance-sun-more-conditions/257085) one), but none that I found was able to satisfy all of them, and writing and modifying YAML based automations as a Python developer was extremely cumbersome.
 
+Since making the repo public, I did stumble upon [AutoMoLi](https://github.com/benleb/ad-automoli), which does meet all of these requirements and is far more advanced. Consider looking there first.
+
 ## My setup
 I use [zigbee2mqtt](https://www.zigbee2mqtt.io/) as my zigbee interface, and [Aqara motion sensors](https://www.zigbee2mqtt.io/devices/RTCGQ11LM.html#xiaomi-rtcgq11lm). The code should be generic enough (and interacts with HA, not z2m) so it should work fine with other setups, but I haven't tested it.
 
