@@ -38,7 +38,7 @@ class HammerHass(hass.Hass):
         except KeyError:
             raise ValueError(f"No room found for entity {entity_id}")
 
-    def get_light_data(self, room_name):
+    def get_light_data(self, room_name) -> dict:
         """Get light data for a given room."""
         area_name = self.get_area(room_name)
         area_data = next(
@@ -48,6 +48,7 @@ class HammerHass(hass.Hass):
             raise ValueError(f"No area {area_name}")
         else:
             self.log(f"Got area: {area_data['name']}")
+
         try:
             lights_data = area_data["lights"]
             self.log(f"Got lights configuration data for {area_data['name']}")
@@ -67,6 +68,8 @@ class HammerHass(hass.Hass):
             except KeyError:
                 self.log(f"No lights configuration data for {room_name}")
                 pass
+
+        return lights_data
 
     def is_in_override(self, room_name: str) -> bool:
         """Check if the room has a light override enabled."""
