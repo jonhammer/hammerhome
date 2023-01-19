@@ -3,6 +3,7 @@ import re
 import time
 from datetime import datetime
 
+# pylint: disable=import-error
 import hassapi as hass
 import pytz
 import yaml

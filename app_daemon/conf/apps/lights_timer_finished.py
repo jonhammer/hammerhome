@@ -1,6 +1,7 @@
 import os
 import re
 
+# pylint: disable=import-error
 import hassapi as hass
 import yaml
 
