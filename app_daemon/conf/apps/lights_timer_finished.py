@@ -1,9 +1,6 @@
 import os
 import re
 
-# pylint: disable=import-error
-import hassapi as hass
-import yaml
 import HammerHass
 
 HOME_DATA_FILE = os.environ.get("HOME_DATA_FILE") or "/conf/apps/home.yaml"
