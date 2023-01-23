@@ -5,25 +5,19 @@
 import os
 from random import choice
 
-import hassapi as hass
-import pytz
-import yaml
-import arrow
+import HammerHass
 
 
 ROOM_RE = r"binary_sensor\.(.*)_motion_sensor_\d"
-HOME_DATA_FILE = os.environ.get("HOME_DATA_FILE")
 DEBUG = os.environ.get("DEBUG")
 
 
-def within_required_time() -> bool:
-    """Return True if the lights should be turned on."""
-    est = pytz.timezone("America/New_York")
-    now = arrow.now(tz=est)
-    return now.hour in [23, 0, 1, 2, 3]
+class RandomLights(HammerHass.HammerHass):
+    def within_required_random_time(self) -> bool:
+        """Return True if the lights should be turned on."""
+        now = self.get_time()
+        return now.hour in [23, 0, 1, 2, 3]
 
-
-class RandomLights(hass.Hass):
     def get_last_llight_turnred_on(self) -> str:
         """Get the name of the last light turned on (saved in helper entity)."""
         return self.get_entity("input_text.last_random_light").state
@@ -32,9 +26,6 @@ class RandomLights(hass.Hass):
         """Get the name of the last light turned on (saved in helper entity)."""
         last_light_helper_entity = self.get_entity("input_text.last_random_light")
         last_light_helper_entity.set_state(state=light_entity_name)
-
-    with open(HOME_DATA_FILE, "r") as f:
-        HOME_DATA = yaml.load(f, Loader=yaml.Loader)
 
     def initialize(self):
         self.log("------------------------")
@@ -50,7 +41,7 @@ class RandomLights(hass.Hass):
         if enabled == "off":
             self.log("Random lights are disabled.")
             return
-        if not within_required_time():
+        if not self.within_required_random_time():
             self.log("Not within required time.")
             return
 

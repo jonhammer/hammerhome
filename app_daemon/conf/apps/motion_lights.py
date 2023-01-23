@@ -1,6 +1,5 @@
 import os
 
-import yaml
 import HammerHass
 
 HOME_DATA_FILE = os.environ.get("HOME_DATA_FILE") or "/conf/apps/home.yaml"
@@ -11,9 +10,6 @@ class MotionLight(HammerHass.HammerHass):
     """Appdaemon class for motion controlled lights"""
 
     LAST_TRIGGERED = {}
-
-    with open(HOME_DATA_FILE, "r") as f:
-        HOME_DATA = yaml.load(f, Loader=yaml.Loader)
 
     def initialize(self):
         """Appdaemon event listener"""

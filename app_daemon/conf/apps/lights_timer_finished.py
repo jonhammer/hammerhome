@@ -8,7 +8,6 @@ DEBUG = os.environ.get("DEBUG")
 
 
 class LightsTimerFinished(HammerHass.HammerHass):
-
     def initialize(self):
         self.log("---------------------------------------")
         self.log("-- lights_timer_finished.py starting --")
@@ -20,12 +19,16 @@ class LightsTimerFinished(HammerHass.HammerHass):
         room_name = self.get_room_name(data["entity_id"])
 
         if self.is_in_override(room_name):
-            self.log(f"{room_name} lights are in override state, will not turn off lights.")
+            self.log(
+                f"{room_name} lights are in override state, will not turn off lights."
+            )
             return
 
         light_data = self.get_light_data(room_name)
         if not self.within_required_time(light_data):
-            self.log(f"{room_name} lights are not within required time, will not turn off lights.")
+            self.log(
+                f"{room_name} lights are not within required time, will not turn off lights."
+            )
             return
 
         lights_name = f"light.{room_name}_lights"
