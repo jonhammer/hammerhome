@@ -20,7 +20,7 @@ def within_required_time() -> bool:
     """Return True if the lights should be turned on."""
     est = pytz.timezone("America/New_York")
     now = arrow.now(tz=est)
-    return now.hour >= 20 and now.hour <= 23
+    return now.hour in [23, 0, 1, 2, 3]
 
 
 class RandomLights(hass.Hass):
@@ -40,7 +40,6 @@ class RandomLights(hass.Hass):
         self.log("------------------------")
         self.log("-- random_lights.py starting --")
         self.log("------------------------")
-        # self.run_every(self.random_light_callback, "now", 10 * 60) # Run every 10 minutes starting now
         self.run_every(
             self.random_light_callback, "now", 60 * 10
         )  # Run every 10 minutes starting now
