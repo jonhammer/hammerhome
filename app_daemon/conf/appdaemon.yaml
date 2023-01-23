@@ -7,4 +7,4 @@ appdaemon:
     HASS:
       type: hass
       ha_url: http://172.29.99.100:8123
-      token: "REDACTED"
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzMTEyMDdlZjI3N2Y0NDAyOTMxZjAxMDMzYjQ1NGFiZCIsImlhdCI6MTY3MjE3NTk5MiwiZXhwIjoxOTg3NTM1OTkyfQ.4B9bPndCy-BGPiYkhMHrfK2tkSSKseS6IeEQLgi80bI"

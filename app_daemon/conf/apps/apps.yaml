@@ -1,15 +1,12 @@
 motion_lights:
   module: motion_lights
   class: MotionLight
-#random_lights:
-#  module: random_lights
-#  class: RandomLights
+random_lights:
+  module: random_lights
+  class: RandomLights
 lights_timer_finished:
   module: lights_timer_finished
   class: LightsTimerFinished
 light_button:
   module: light_button
   class: LightButton
-blinds_button:
-  module: blinds_button
-  class: BlindsButton
