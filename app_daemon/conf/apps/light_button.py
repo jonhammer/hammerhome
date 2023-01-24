@@ -39,11 +39,11 @@ class LightButton(hass.Hass):
         self.log(f"Room: {room}")
         self.log(f"Lights: {lights}")
 
-        if state == "on":
+        if state in ["on", "single"] :
             self.log(f"Toggling {lights}")
             self.toggle(lights)
 
-        if state == "brightness_move_up":
+        if state in ["brightness_move_up", "hold"]:
             self.log(f"Brightness modification requested for {lights}")
             light_entity = self.get_entity(lights)
             if light_entity.state == "off":
