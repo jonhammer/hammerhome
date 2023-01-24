@@ -10,7 +10,7 @@
     duration: "00:15:00"
   basement_light_timer:
     name: basement_light_timer
-    duration: "00:10:00"
+    duration: "00:05:00"
   garage_light_timer:
     name: garage_light_timer
     duration: "00:03:00"
@@ -43,7 +43,7 @@
     duration: "00:10:00"
   downstairs_bathroom_light_timer:
       name: downstairs_bathroom_light_timer
-      duration: "00:15:00"
+      duration: "00:10:00"
   guest_bathroom_light_timer:
     name: guest_bathroom_light_timer
     duration: "00:15:00"
