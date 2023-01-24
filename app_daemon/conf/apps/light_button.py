@@ -29,7 +29,8 @@ class LightButton(hass.Hass):
             return
 
         state = data["new_state"]["state"]
-        if state not in ["on", "brightness_move_up"]:
+        if state not in ["on", "brightness_move_up", "single", "hold"]:
+            self.log(f"Unknown state for button press: {state}")
             return
 
         self.log(f"{data['entity_id']} pressed")
