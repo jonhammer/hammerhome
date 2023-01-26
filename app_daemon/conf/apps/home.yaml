@@ -5,64 +5,64 @@ areas:
       dusk_brightness: 100
       night_brightness: 100
     rooms:
-       - name: basement_stairs
-       - name: laundry_room
-       - name: game_room
-       - name: workshop
+      - name: basement_stairs
+      - name: laundry_room
+      - name: game_room
+      - name: workshop
   - name: downstairs
     rooms:
-       - name: garage
-         lights:
-           dusk_brightness: 100
-           night_brightness: 100
-       - name: entry
-         lights:
-           sun_elevation_below: 40
-       - name: mudroom
-       - name: kitchen
-         lights:
-           sun_elevation_below: 40
-       - name: dining_room
-         lights:
-           sun_elevation_below: 40
-       - name: living_room
-         lights:
-           sun_elevation_below: 40
-       - name: office
-         lights:
-           after: "00:00"
-           before: "23:59"
-           dusk_brightness: 50
-       - name: pantry
-       - name: mudroom_closet
-       - name: downstairs_bathroom
+      - name: garage
+        lights:
+          dusk_brightness: 100
+          night_brightness: 100
+      - name: entry
+        lights:
+          sun_elevation_below: 40
+      - name: mudroom
+      - name: kitchen
+        lights:
+          sun_elevation_below: 40
+      - name: dining_room
+        lights:
+          sun_elevation_below: 40
+      - name: living_room
+        lights:
+          sun_elevation_below: 40
+      - name: office
+        lights:
+          after: "00:00"
+          before: "23:59"
+          dusk_brightness: 50
+      - name: pantry
+      - name: mudroom_closet
+      - name: downstairs_bathroom
   - name: upstairs
     rooms:
-       - name: upstairs_hallway
-         lights:
-           after: "12:00"
-           before: "22:00"
-       - name: bedroom
-         lights:
-           after: "13:00"
-           before: "21:30"
-           sun_elevation_below: 40
-           night_brightness: 1
-       - name: bathroom
-         lights:
-           dusk_brightness: 70
-           night_brightness: 20
-       - name: guest_bathroom
-       - name: sarah_office
-       - name: guest_room
-       - name: baby_room
-       - name: closet_room
-         lights:
-           after: "08:30"
-           before: "21:30"
+      - name: upstairs_hallway
+        lights:
+          after: "12:00"
+          before: "22:00"
+      - name: bedroom
+        lights:
+          after: "13:00"
+          before: "21:30"
+          sun_elevation_below: 40
+          night_brightness: 1
+      - name: bathroom
+        lights:
+          dusk_brightness: 70
+          night_brightness: 20
+      - name: guest_bathroom
+      - name: sarah_office
+      - name: guest_room
+      - name: baby_room
+      - name: closet_room
+        lights:
+          after: "08:30"
+          before: "21:30"
   - name: outside
     rooms:
-       - name: outside_back_yard
-       - name: outside_front_entrance
-       - name: outside_garage_entrance
-       - name: outside_side_entrance
+      - name: outside_back_yard
+      - name: outside_front_entrance
+      - name: outside_garage_entrance
+      - name: outside_side_entrance

@@ -1,3 +1,3 @@
-  last_random_light:
-    name: Name of last random light that was turned on
-    initial: unknown
+last_random_light:
+  name: Name of last random light that was turned on
+  initial: unknown

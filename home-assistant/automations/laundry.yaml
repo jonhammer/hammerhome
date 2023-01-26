@@ -1,234 +1,234 @@
 - action:
-  - entity_id:
-    - timer.dryer
-    service: timer.start
+    - entity_id:
+        - timer.dryer
+      service: timer.start
   alias: Dryer - Start timer on vibration
   condition:
-  - condition: state
-    entity_id: timer.dryer
-    state: idle
-  - condition: state
-    entity_id: input_boolean.dryer_in_progress
-    state: 'off'
+    - condition: state
+      entity_id: timer.dryer
+      state: idle
+    - condition: state
+      entity_id: input_boolean.dryer_in_progress
+      state: 'off'
   id: dryer_detect_start_begin_timer
   trigger:
-  - entity_id: sensor.laundry_room_dryer_vibration_sensor_0_action
-    platform: state
-    to: vibration
+    - entity_id: sensor.laundry_room_dryer_vibration_sensor_0_action
+      platform: state
+      to: vibration
 
 - action:
-  - entity_id:
-    - input_number.dryer_tracker
-    service: input_number.increment
+    - entity_id:
+        - input_number.dryer_tracker
+      service: input_number.increment
   alias: Dryer - Increment counter on vibration while timer is running
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: timer.dryer
-      state: active
+      - condition: state
+        entity_id: timer.dryer
+        state: active
   id: dryer_detect_start_count_vibration
   trigger:
-  - entity_id: sensor.laundry_room_dryer_vibration_sensor_0_action
-    platform: state
-    to: vibration
+    - entity_id: sensor.laundry_room_dryer_vibration_sensor_0_action
+      platform: state
+      to: vibration
 
 - action:
-  - entity_id:
-    - input_boolean.dryer_in_progress
-    service: input_boolean.turn_on
-  - data:
-      value: 0
-    service: input_number.set_value
-    target:
-      entity_id: input_number.dryer_tracker
+    - entity_id:
+        - input_boolean.dryer_in_progress
+      service: input_boolean.turn_on
+    - data:
+        value: 0
+      service: input_number.set_value
+      target:
+        entity_id: input_number.dryer_tracker
   alias: Dryer - Turn on in progress input_boolean if at least 6 vibrations detected
   condition:
     condition: and
     conditions:
-    - above: 5
-      condition: numeric_state
-      entity_id: input_number.dryer_tracker
+      - above: 5
+        condition: numeric_state
+        entity_id: input_number.dryer_tracker
   id: dryer_detect_start_timer_finished_start_detected
   trigger:
-  - event_data:
-      entity_id: timer.dryer
-    event_type: timer.finished
-    platform: event
+    - event_data:
+        entity_id: timer.dryer
+      event_type: timer.finished
+      platform: event
 
 - action:
-  - data:
-      value: 0
-    service: input_number.set_value
-    target:
-      entity_id: input_number.dryer_tracker
+    - data:
+        value: 0
+      service: input_number.set_value
+      target:
+        entity_id: input_number.dryer_tracker
   alias: Dryer - Reset counter if not enough vibrations are detected
   condition:
     condition: and
     conditions:
-    - below: 6
-      condition: numeric_state
-      entity_id: input_number.dryer_tracker
+      - below: 6
+        condition: numeric_state
+        entity_id: input_number.dryer_tracker
   id: dryer_detect_start_timer_finished_start_not_detected
   trigger:
-  - event_data:
-      entity_id: timer.dryer
-    event_type: timer.finished
-    platform: event
+    - event_data:
+        entity_id: timer.dryer
+      event_type: timer.finished
+      platform: event
 
 - action:
-  - entity_id:
-    - input_boolean.dryer_in_progress
-    service: input_boolean.turn_off
-  - entity_id:
-    - input_boolean.dryer_done
-    service: input_boolean.turn_on
+    - entity_id:
+        - input_boolean.dryer_in_progress
+      service: input_boolean.turn_off
+    - entity_id:
+        - input_boolean.dryer_done
+      service: input_boolean.turn_on
   alias: Dryer - Turn off in progress and turn on complete after 5 minutes of no vibration
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: input_boolean.dryer_in_progress
-      state: 'on'
+      - condition: state
+        entity_id: input_boolean.dryer_in_progress
+        state: 'on'
   id: dryer_complete
   trigger:
-  - entity_id: sensor.laundry_room_dryer_vibration_sensor_0_action
-    for: 00:05:00
-    from: vibration
-    platform: state
+    - entity_id: sensor.laundry_room_dryer_vibration_sensor_0_action
+      for: 00:05:00
+      from: vibration
+      platform: state
 
 - action:
-  - data:
-      data:
-        priority: 1
-      message: Dryer done
-      title: Dryer done
-    service: notify.pushover
-  - entity_id:
-    - input_boolean.dryer_done
-    service: input_boolean.turn_off
+    - data:
+        data:
+          priority: 1
+        message: Dryer done
+        title: Dryer done
+      service: notify.pushover
+    - entity_id:
+        - input_boolean.dryer_done
+      service: input_boolean.turn_off
   alias: Dryer - Send notification when dryer is finished
   id: dryer_notify_complete
   trigger:
-  - entity_id: input_boolean.dryer_done
-    from: 'off'
-    platform: state
-    to: 'on'
+    - entity_id: input_boolean.dryer_done
+      from: 'off'
+      platform: state
+      to: 'on'
 
 
 - action:
-  - entity_id:
-    - timer.washing_machine
-    service: timer.start
+    - entity_id:
+        - timer.washing_machine
+      service: timer.start
   alias: Washer - Start timer on vibration
   condition:
-  - condition: state
-    entity_id: timer.washing_machine
-    state: idle
-  - condition: state
-    entity_id: input_boolean.washing_machine_in_progress
-    state: 'off'
+    - condition: state
+      entity_id: timer.washing_machine
+      state: idle
+    - condition: state
+      entity_id: input_boolean.washing_machine_in_progress
+      state: 'off'
   id: washing_machine_detect_start_begin_timer
   trigger:
-  - entity_id: sensor.laundry_room_washing_machine_vibration_sensor_0_action
-    platform: state
-    to: vibration
+    - entity_id: sensor.laundry_room_washing_machine_vibration_sensor_0_action
+      platform: state
+      to: vibration
 
 - action:
-  - entity_id:
-    - input_number.washing_machine_tracker
-    service: input_number.increment
+    - entity_id:
+        - input_number.washing_machine_tracker
+      service: input_number.increment
   alias: Washer - Increment counter on vibration while timer is running
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: timer.washing_machine
-      state: active
+      - condition: state
+        entity_id: timer.washing_machine
+        state: active
   id: washing_machine_detect_start_count_vibration
   trigger:
-  - entity_id: sensor.laundry_room_washing_machine_vibration_sensor_0_action
-    platform: state
-    to: vibration
+    - entity_id: sensor.laundry_room_washing_machine_vibration_sensor_0_action
+      platform: state
+      to: vibration
 
 - action:
-  - entity_id:
-    - input_boolean.washing_machine_in_progress
-    service: input_boolean.turn_on
-  - data:
-      value: 0
-    service: input_number.set_value
-    target:
-      entity_id: input_number.washing_machine_tracker
+    - entity_id:
+        - input_boolean.washing_machine_in_progress
+      service: input_boolean.turn_on
+    - data:
+        value: 0
+      service: input_number.set_value
+      target:
+        entity_id: input_number.washing_machine_tracker
   alias: Washer - Turn on in progress input_boolean if at least 6 vibrations detected
   condition:
     condition: and
     conditions:
-    - above: 5
-      condition: numeric_state
-      entity_id: input_number.washing_machine_tracker
+      - above: 5
+        condition: numeric_state
+        entity_id: input_number.washing_machine_tracker
   id: washing_machine_detect_start_timer_finished_start_detected
   trigger:
-  - event_data:
-      entity_id: timer.washing_machine
-    event_type: timer.finished
-    platform: event
+    - event_data:
+        entity_id: timer.washing_machine
+      event_type: timer.finished
+      platform: event
 
 - action:
-  - data:
-      value: 0
-    service: input_number.set_value
-    target:
-      entity_id: input_number.washing_machine_tracker
+    - data:
+        value: 0
+      service: input_number.set_value
+      target:
+        entity_id: input_number.washing_machine_tracker
   alias: Washer - Reset counter if not enough vibrations are detected
   condition:
     condition: and
     conditions:
-    - below: 6
-      condition: numeric_state
-      entity_id: input_number.washing_machine_tracker
+      - below: 6
+        condition: numeric_state
+        entity_id: input_number.washing_machine_tracker
   id: washing_machine_detect_start_timer_finished_start_not_detected
   trigger:
-  - event_data:
-      entity_id: timer.washing_machine
-    event_type: timer.finished
-    platform: event
+    - event_data:
+        entity_id: timer.washing_machine
+      event_type: timer.finished
+      platform: event
 
 - action:
-  - entity_id:
-    - input_boolean.washing_machine_in_progress
-    service: input_boolean.turn_off
-  - entity_id:
-    - input_boolean.washing_machine_done
-    service: input_boolean.turn_on
+    - entity_id:
+        - input_boolean.washing_machine_in_progress
+      service: input_boolean.turn_off
+    - entity_id:
+        - input_boolean.washing_machine_done
+      service: input_boolean.turn_on
   alias: Washer - Turn off in progress and turn on complete after 5 minutes of no vibration
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: input_boolean.washing_machine_in_progress
-      state: 'on'
+      - condition: state
+        entity_id: input_boolean.washing_machine_in_progress
+        state: 'on'
   id: washing_machine_complete
   trigger:
-  - entity_id: sensor.laundry_room_washing_machine_vibration_sensor_0_action
-    for: 00:08:00
-    from: vibration
-    platform: state
+    - entity_id: sensor.laundry_room_washing_machine_vibration_sensor_0_action
+      for: 00:08:00
+      from: vibration
+      platform: state
 
 - action:
-  - data:
-      data:
-        priority: 1
-      message: Washing machine done
-      title: Washing machine done
-    service: notify.pushover
-  - entity_id:
-    - input_boolean.washing_machine_done
-    service: input_boolean.turn_off
+    - data:
+        data:
+          priority: 1
+        message: Washing machine done
+        title: Washing machine done
+      service: notify.pushover
+    - entity_id:
+        - input_boolean.washing_machine_done
+      service: input_boolean.turn_off
   alias: Washer - Send notification when washing_machine is finished
   id: washing_machine_notify_complete
   trigger:
-  - entity_id: input_boolean.washing_machine_done
-    from: 'off'
-    platform: state
-    to: 'on'
+    - entity_id: input_boolean.washing_machine_done
+      from: 'off'
+      platform: state
+      to: 'on'
