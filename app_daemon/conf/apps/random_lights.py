@@ -13,6 +13,9 @@ DEBUG = os.environ.get("DEBUG")
 
 
 class RandomLights(HammerHass.HammerHass):
+
+    TURN_OFF_LAST = False
+
     def within_required_random_time(self) -> bool:
         """Return True if the lights should be turned on."""
         now = self.get_time()
@@ -43,7 +46,13 @@ class RandomLights(HammerHass.HammerHass):
             return
         if not self.within_required_random_time():
             self.log("Not within required time.")
+            if self.TURN_OFF_LAST:
+                self.log("Turning off last light until back within required timeframe.")
+                self.turn_off(self.get_last_llight_turnred_on())
+                self.TURN_OFF_LAST = False
             return
+
+        self.TURN_OFF_LAST = True
 
         all_entites = self.get_state()
         lights = [i for i in all_entites if i.startswith("light.")]
