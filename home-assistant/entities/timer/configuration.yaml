@@ -28,16 +28,16 @@ dining_room_light_timer:
   duration: "00:02:00"
 living_room_light_timer:
   name: living_room_light_timer
-  duration: "00:15:00"
+  duration: "00:02:00"
 office_light_timer:
   name: office_light_timer
-  duration: "00:15:00"
+  duration: "00:05:00"
 upstairs_hallway_light_timer:
   name: upstairs_hallway_light_timer
   duration: "00:02:00"
 bedroom_light_timer:
   name: bedroom_light_timer
-  duration: "00:15:00"
+  duration: "00:05:00"
 bathroom_light_timer:
   name: bathroom_light_timer
   duration: "00:05:00"

@@ -150,11 +150,11 @@ class HammerHass(hass.Hass):
         """Get the part of the day (for brightness purposes) from a datetime object.
         e.g., one of ['daytime', 'dusk', 'night']
         """
-        if 8 <= dt.hour <= 18:  # 8:00AM - 6:59PM
+        if 7 <= dt.hour <= 18:  # 7:00AM - 6:59PM
             return "daytime"
         if 19 <= dt.hour <= 20:  # 7:00PM - 8:59PM
             return "dusk"
-        if dt.hour >= 20 or dt.hour <= 7:  # 9:01PM 0 - 7:59AM
+        if dt.hour >= 21 or dt.hour <= 6:  # 9:00PM 0 - 6:59AM
             return "night"
 
         raise ValueError(f"Unknown part of day for {dt.hour}")
