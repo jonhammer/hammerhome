@@ -1,0 +1,39 @@
+- trigger:
+    - platform: sun
+      event: sunrise
+  action:
+    - service: cover.open_cover
+      entity_id:
+        - cover.office_blinds_0
+  id: open_office_blinds_0_in_morning
+  alias: Open the office_blinds in the morning
+
+- trigger:
+    - platform: sun
+      event: sunrise
+  action:
+    - service: cover.open_cover
+      entity_id:
+        - cover.office_blinds_1
+  id: open_office_blinds_1_in_morning
+  alias: Open the office_blinds in the morning
+
+- trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: cover.close_cover
+      entity_id:
+        - cover.office_blinds_0
+  id: close_office_blinds_0_in_evening
+  alias: Close the office_blinds in the evening
+
+- trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: cover.close_cover
+      entity_id:
+        - cover.office_blinds_1
+  id: close_office_blinds_1_in_evening
+  alias: Close the office_blinds in the evening

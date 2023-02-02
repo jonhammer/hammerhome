@@ -4,9 +4,10 @@ import time
 import paho.mqtt.client as mqtt
 from paho.mqtt.publish import single
 
-from mqtt.mqtt import parse_bytes
+from helper_scripts.mqtt.mqtt_functions import parse_bytes
 
 CAN_CONTINUE = False
+CURRENT_DEVICE = None
 
 
 # The callback for when the client receives a CONNACK response from the server.
@@ -15,22 +16,28 @@ def on_connect(client, userdata, flags, rc):
 
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
-    client.subscribe("zigbee2mqtt/bridge/log")
+    client.subscribe("zigbee2mqtt/bridge/response/device/ota_update/update")
 
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    print(msg.topic + " " + str(msg.payload))
+    # Zigbee2MQTT:info  2023-01-24 17:48:49: MQTT publish: topic 'zigbee2mqtt/bridge/response/device/ota_update/update', payload '{"data":{"from":null,"id":"game_room_outlet_0","to":null},"status":"ok"}'
+    parsed = parse_bytes(msg.payload)
+    print(parsed)
     global CAN_CONTINUE
-    if (
-        parse_bytes(msg.payload)["meta"]["status"] == "update_failed"
-        or parse_bytes(msg.payload)["meta"]["status"] == "update_succeeded"
-    ):
-        print("setting CAN CONTINUE")
-        CAN_CONTINUE = True
+    global CURRENT_DEVICE
+    if parsed['data']['id'] == CURRENT_DEVICE:
+        if (
+            parsed["status"] == "ok"
+        ):
+            print("setting CAN CONTINUE")
+            CAN_CONTINUE = True
 
 
-ip = "100.123.227.109"
+print(f"Sleeping for 60 minutes")
+time.sleep(60 * 60)
+
+ip = "100.126.3.8"
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
@@ -41,20 +48,17 @@ client.connect(ip, 1883, 60)
 # handles reconnecting.
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
-devices = ["game_room_light_1", "game_room_light_3", "game_room_light_5"]
+devices = ["bedroom_zrouter_0", "dining_room_flood_1", "kitchen_flood_1", "basement_stairs_light_1"]
 client.loop_start()
 for device in devices:
+    CURRENT_DEVICE = device
     print(f"Updating {device}")
     topic = "zigbee2mqtt/bridge/request/device/ota_update/update"
     data = {"id": device}
     single(topic, payload=json.dumps(data), hostname=ip)
     loops = 0
+    print(f"Starting update of {device}...")
     while not CAN_CONTINUE:
-        seconds = 90 - (loops * 10)
-        if seconds > 0:
-            print(f"Waiting ({seconds} seconds remaining until timeout)...")
-        else:
-            print("Update in progress...")
         time.sleep(10)
         loops += 1
     CAN_CONTINUE = False
