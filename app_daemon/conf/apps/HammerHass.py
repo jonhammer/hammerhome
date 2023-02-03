@@ -34,7 +34,7 @@ class HammerHass(hass.Hass):
         possible_rooms.sort(key=len, reverse=True)
         try:
             return possible_rooms[0]
-        except KeyError:
+        except IndexError:
             raise ValueError(f"No room found for entity {entity_id}")
 
     def get_light_data(self, room_name) -> dict:

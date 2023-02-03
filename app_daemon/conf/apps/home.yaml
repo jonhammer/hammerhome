@@ -28,6 +28,9 @@ areas:
       - name: living_room
         lights:
           sun_elevation_below: 40
+          block_off_entities:
+            input_boolean.living_room_occupancy: "on"
+            media_player.family_room_tv_2: "playing"
       - name: office
         lights:
           after: "00:00"
