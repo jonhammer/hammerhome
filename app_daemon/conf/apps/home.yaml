@@ -29,7 +29,7 @@ areas:
         lights:
           sun_elevation_below: 40
           block_off_entities:
-            input_boolean.living_room_occupancy: "on"
+            binary_sensor.living_room_presence_sensor_0_presence: "on"
             media_player.family_room_tv_2: "playing"
       - name: office
         lights:
