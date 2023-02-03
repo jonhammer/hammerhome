@@ -28,7 +28,7 @@ dining_room_light_timer:
   duration: "00:02:00"
 living_room_light_timer:
   name: living_room_light_timer
-  duration: "00:02:00"
+  duration: "00:05:00"
 office_light_timer:
   name: office_light_timer
   duration: "00:05:00"
@@ -40,10 +40,10 @@ bedroom_light_timer:
   duration: "00:05:00"
 bathroom_light_timer:
   name: bathroom_light_timer
-  duration: "00:05:00"
+  duration: "00:15:00"
 downstairs_bathroom_light_timer:
   name: downstairs_bathroom_light_timer
-  duration: "00:05:00"
+  duration: "00:15:00"
 guest_bathroom_light_timer:
   name: guest_bathroom_light_timer
   duration: "00:15:00"

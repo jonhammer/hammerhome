@@ -325,7 +325,3 @@ closet_room_light_toggle_override:
   name: closet light override
   icon: mdi:home-export-outline
   initial: 'off'
-living_room_occupancy:
-  name: living_room is occupied
-  icon: mdi:home-export-outline
-  initial: 'off'
