@@ -20,17 +20,28 @@ class MotionLight(HammerHass.HammerHass):
 
     def motion_detected_callback(self, _event_name, data, _kwargs=None):
         """Appdaemon callback for motion lights logic"""
+
+        is_presence_sensor = False
         if not (
             "motion_sensor" in data["entity_id"] and "occupancy" in data["entity_id"]
         ):
-            return
+            is_presence_sensor = True
+            if not (
+                    "presence_sensor" in data["entity_id"] and "event" in data["entity_id"]
+            ):
+                return
 
         new_state = data["new_state"]["state"]
 
-        if not new_state == "on":
-            return
-
         room_name = self.get_room_name(data["entity_id"])
+        lights_data = self.get_light_data(room_name)
+
+        # Only listen to non-leave events for presence sensors
+        if is_presence_sensor and new_state == "leave":
+            return
+        # Only listen to "on" events for motion sensors
+        if not is_presence_sensor and not new_state == "on":
+            return
 
         timer_entity = f"timer.{room_name}_light_timer"
         light_entity = f"light.{room_name}_lights"
@@ -42,7 +53,6 @@ class MotionLight(HammerHass.HammerHass):
         self.log(f"Timer: {timer_entity}")
         self.log(f"Entity: {light_entity}")
 
-        lights_data = self.get_light_data(room_name)
 
         # Run checks
         try:
