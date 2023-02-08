@@ -24,6 +24,8 @@ areas:
           sun_elevation_below: 40
       - name: dining_room
         lights:
+          block_off_entities:
+            binary_sensor.dining_room_presence_sensor_0_presence: "on"
           sun_elevation_below: 40
       - name: living_room
         lights:
