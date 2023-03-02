@@ -28,12 +28,13 @@ class LightsTimerFinished(HammerHass.HammerHass):
             )
             return
 
+        timer_entity = f"timer.{room_name}_light_timer"
+
         blocking_entities = light_data.get("block_off_entities", {})
         for blocking_entity_name, state in blocking_entities.items():
             blocking_entity = self.get_entity(blocking_entity_name)
             if blocking_entity.is_state(state):
                 self.log(f"{blocking_entity_name} is {state}, will not turn off lights.")
-                timer_entity = f"timer.{room_name}_light_timer"
                 self.restart_home_assistant_timer(timer_entity)
                 return
 
@@ -41,6 +42,7 @@ class LightsTimerFinished(HammerHass.HammerHass):
             self.log(
                 f"{room_name} lights are in override state, will not turn off lights."
             )
+            self.restart_home_assistant_timer(timer_entity)
             return
 
         lights_name = f"light.{room_name}_lights"

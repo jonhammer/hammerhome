@@ -21,7 +21,7 @@ class RandomLights(HammerHass.HammerHass):
         now = self.get_time()
         return now.hour in [23, 0, 1, 2, 3]
 
-    def get_last_llight_turnred_on(self) -> str:
+    def get_last_light_turnred_on(self) -> str:
         """Get the name of the last light turned on (saved in helper entity)."""
         return self.get_entity("input_text.last_random_light").state
 
@@ -48,7 +48,7 @@ class RandomLights(HammerHass.HammerHass):
             self.log("Not within required time.")
             if self.TURN_OFF_LAST:
                 self.log("Turning off last light until back within required timeframe.")
-                self.turn_off(self.get_last_llight_turnred_on())
+                self.turn_off(self.get_last_light_turnred_on())
                 self.TURN_OFF_LAST = False
             return
 
@@ -70,7 +70,7 @@ class RandomLights(HammerHass.HammerHass):
 
         new_light = choice(downstairs_lights)
         self.log(f"New light: {new_light}")
-        old_light = self.get_last_llight_turnred_on()
+        old_light = self.get_last_light_turnred_on()
         self.log(f"Old light: {old_light}")
 
         try:

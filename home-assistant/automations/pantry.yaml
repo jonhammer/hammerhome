@@ -8,7 +8,7 @@
   action:
     - service: light.turn_on
       entity_id:
-        - light.pantry_light_0
+        - light.pantry_lights
       data:
         brightness_pct: 100
 
@@ -22,4 +22,4 @@
   action:
     - service: light.turn_off
       entity_id:
-        - light.pantry_light_0
+        - light.pantry_lights

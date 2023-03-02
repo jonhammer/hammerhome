@@ -325,3 +325,19 @@ closet_room_light_toggle_override:
   name: closet light override
   icon: mdi:home-export-outline
   initial: 'off'
+office_heater_override:
+  name: office heater override
+  icon: mdi:home-export-outline
+  initial: 'off'
+remodel_security_mode:
+  name: remodel security mode
+  icon: mdi:home-export-outline
+  initial: 'off'
+working_out:
+  name: remodel security mode
+  icon: mdi:home-export-outline
+  initial: 'off'
+laptop_wake_on_lan:
+  name: laptop wake on lan
+  icon: mdi:home-export-outline
+  initial: 'off'
