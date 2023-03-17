@@ -38,6 +38,8 @@ areas:
           after: "00:00"
           before: "23:59"
           dusk_brightness: 50
+          block_off_entities:
+            binary_sensor.office_presence_sensor_0_presence: "on"
       - name: pantry
       - name: mudroom_closet
       - name: downstairs_bathroom
