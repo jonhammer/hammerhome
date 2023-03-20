@@ -1,0 +1,12 @@
+- trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.node_red_deadman
+  action:
+    - service: notify.pushover
+      data:
+        message: Node red deadman timer expired
+        title: Node red deadman timer expired
+        target: 'pixel5'
+  id: node_red_deadman_timer_expired

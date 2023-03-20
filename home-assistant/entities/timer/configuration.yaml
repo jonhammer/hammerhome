@@ -104,3 +104,6 @@ sarah_office_light_toggle_timer:
 closet_room_light_toggle_timer:
   name: closet_light_toggle_timer
   duration: "00:01:30"
+node_red_deadman:
+  name: node_red_deadman
+  duration: "00:01:00"
