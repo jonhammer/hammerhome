@@ -67,7 +67,7 @@ areas:
       - name: baby_room
       - name: closet_room
         lights:
-          after: "08:30"
+          after: "06:00"
           before: "21:30"
   - name: outside
     rooms:
