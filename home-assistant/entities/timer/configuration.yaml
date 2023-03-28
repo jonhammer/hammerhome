@@ -106,4 +106,4 @@ closet_room_light_toggle_timer:
   duration: "00:01:30"
 node_red_deadman:
   name: node_red_deadman
-  duration: "00:01:00"
+  duration: "00:05:00"
