@@ -1,46 +1,40 @@
 import os
+from typing import Optional
 
 import HammerHass
 
-HOME_DATA_FILE = os.environ.get("HOME_DATA_FILE") or "/conf/apps/home.yaml"
-TIMEZONE_NAME = os.environ.get("TIMEZONE_NAME") or "America/New_York"
+HOME_DATA_FILE = os.environ.get("HOME_DATA_FILE", "/conf/apps/home.yaml")
+TIMEZONE_NAME = os.environ.get("TIMEZONE_NAME", "America/New_York")
 
 
 class MotionLight(HammerHass.HammerHass):
-    """Appdaemon class for motion controlled lights"""
+    """Appdaemon class for motion-controlled lights"""
 
     LAST_TRIGGERED = {}
 
-    def initialize(self):
+    def initialize(self) -> None:
         """Appdaemon event listener"""
         self.log("------------------------")
         self.log("-- motion_lights.py starting --")
         self.log("------------------------")
         self.listen_event(self.motion_detected_callback, "state_changed")
 
-    def motion_detected_callback(self, _event_name, data, _kwargs=None):
+    def motion_detected_callback(self, _event_name: str, data: dict, _kwargs: Optional[dict] = None) -> None:
         """Appdaemon callback for motion lights logic"""
 
-        is_presence_sensor = False
-        if not (
-            "motion_sensor" in data["entity_id"] and "occupancy" in data["entity_id"]
-        ):
+        if "motion_sensor" in data["entity_id"] and "occupancy" in data["entity_id"]:
+            is_presence_sensor = False
+        elif "presence_sensor" in data["entity_id"] and "event" in data["entity_id"]:
             is_presence_sensor = True
-            if not (
-                    "presence_sensor" in data["entity_id"] and "event" in data["entity_id"]
-            ):
-                return
+        else:
+            return
 
         new_state = data["new_state"]["state"]
 
         room_name = self.get_room_name(data["entity_id"])
         lights_data = self.get_light_data(room_name)
 
-        # Only listen to non-leave events for presence sensors
-        if is_presence_sensor and new_state == "leave":
-            return
-        # Only listen to "on" events for motion sensors
-        if not is_presence_sensor and not new_state == "on":
+        if (is_presence_sensor and new_state == "leave") or (not is_presence_sensor and new_state != "on"):
             return
 
         timer_entity = f"timer.{room_name}_light_timer"
@@ -53,8 +47,6 @@ class MotionLight(HammerHass.HammerHass):
         self.log(f"Timer: {timer_entity}")
         self.log(f"Entity: {light_entity}")
 
-
-        # Run checks
         try:
             if self.is_in_override(room_name):
                 self.log(
@@ -77,7 +69,6 @@ class MotionLight(HammerHass.HammerHass):
             )
             return
 
-        # Get brightness, turn on lights, reset timers
         brightness = self.get_brightness(room_name, lights_data)
         self.log(f"Brightness requested: {brightness}")
 
@@ -89,50 +80,27 @@ class MotionLight(HammerHass.HammerHass):
             self.turn_on(light_entity)
         self.restart_home_assistant_timer(timer_entity)
 
-        # Update last triggered time
         now = self.get_time()
         self.LAST_TRIGGERED[room_name] = now
 
-    def get_brightness(self, room_name, lights_data: dict) -> int:
+    def get_brightness(self, room_name: str, lights_data: dict) -> int:
         """Get brightness for a given room."""
         now = self.get_time()
-        last_trigger_time = self.LAST_TRIGGERED.get(room_name)
-        if not last_trigger_time:
-            last_trigger_time = now.replace(year=1970)
+        last_trigger_time = self.LAST_TRIGGERED.get(room_name, now.replace(year=1970))
 
         current_part_of_day = self.get_part_of_day(now)
+        last_triggered_part_of_day = self.get_part_of_day(last_trigger_time)
 
-        # Ensure we only modify brightness once per time period (morning/dusk/night). Otherwise keep current brightness.
-        if (now - last_trigger_time).total_seconds() < 43000:
-            last_triggered_part_of_day = self.get_part_of_day(last_trigger_time)
+        if (now - last_trigger_time).total_seconds() < 43000 and current_part_of_day == last_triggered_part_of_day:
+            self.log("Last triggered recently, not modifying brightness level")
+            return 0
 
-            if current_part_of_day == last_triggered_part_of_day:
-                self.log("Last triggered recently, not modifying brightness level")
-                return 0
+        brightness_mapping = {
+            "daytime": lights_data.get("daytime_brightness", 100),
+            "dusk": lights_data.get("dusk_brightness", 50),
+            "night": lights_data.get("night_brightness", 10),
+        }
 
-        # Check config for brightness levels, otherwise use defaults:
-        # Day = 100
-        # Dusk = 50
-        # Night = 10
-        if current_part_of_day == "daytime":
-            daytime_brightness = lights_data.get("daytime_brightness")
-            if daytime_brightness:
-                return daytime_brightness
-            else:
-                return 100
+        return brightness_mapping.get(current_part_of_day, 0)
 
-        if current_part_of_day == "dusk":
-            self.log("7:00PM - 8:59PM")
-            dusk_brightness = lights_data.get("dusk_brightness")
-            if dusk_brightness:
-                return dusk_brightness
-            else:
-                return 50
-
-        if current_part_of_day == "night":
-            self.log("9:01PM - 7:59AM")
-            night_brightness = lights_data.get("night_brightness")
-            if night_brightness:
-                return night_brightness
-            else:
-                return 10
+            
