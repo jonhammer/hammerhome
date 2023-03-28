@@ -8,5 +8,6 @@
       data:
         message: Node red deadman timer expired
         title: Node red deadman timer expired
-        target: 'pixel5'
+        target:
+          - jon
   id: node_red_deadman_timer_expired
