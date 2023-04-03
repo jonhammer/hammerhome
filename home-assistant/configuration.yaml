@@ -1,4 +1,5 @@
-# Load default configuration, should not be removed.
+
+# Loads default set of integrations. Do not remove.
 default_config:
 
 # Load frontend themes from the themes folder
@@ -13,8 +14,51 @@ automation: !include_dir_merge_list automations
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
-# Entity configs
 timer: !include entities/timer/configuration.yaml
 input_boolean: !include entities/input_boolean/configuration.yaml
 input_number: !include entities/input_number/configuration.yaml
 input_text: !include entities/input_text/configuration.yaml
+template: !include entities/template/configuration.yaml
+
+spotcast:
+  sp_key: REDACTED
+  sp_dc: REDACTED
+  country: US
+
+wake_on_lan:
+
+
+binary_sensor:
+  - platform: group
+    name: "Kitchen Occupancy"
+    device_class: motion
+    entities:
+      - binary_sensor.kitchen_motion_sensor_0_occupancy
+      - binary_sensor.kitchen_motion_sensor_1_occupancy
+      - binary_sensor.kitchen_presence_sensor_0_presence
+
+  - platform: group
+    name: "Office Occupancy"
+    device_class: motion
+    entities:
+      - binary_sensor.office_motion_sensor_0_occupancy
+      - binary_sensor.office_motion_sensor_1_occupancy
+      - binary_sensor.office_presence_sensor_0_presence
+
+  - platform: group
+    name: "Dining Room Occupancy"
+    device_class: motion
+    entities:
+      - binary_sensor.dining_room_motion_sensor_0_occupancy
+      - binary_sensor.dining_room_motion_sensor_1_occupancy
+      - binary_sensor.dining_room_motion_sensor_2_occupancy
+      - binary_sensor.dining_room_presence_sensor_0_presence
+
+  - platform: group
+    name: "Living Room Occupancy"
+    device_class: motion
+    entities:
+      - binary_sensor.living_room_motion_sensor_0_occupancy
+      - binary_sensor.living_room_motion_sensor_1_occupancy
+      - binary_sensor.living_room_motion_sensor_2_occupancy
+      - binary_sensor.living_room_presence_sensor_0_presence
