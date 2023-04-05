@@ -1,9 +1,0 @@
-- trigger:
-    - platform: time
-      at: "01:00:00"
-  action:
-    - service: input_boolean.turn_off
-      target:
-        entity_id: group.light_overrides
-  id: turn_off_overrides_overnight
-  alias: Turn off light overrides at 1am
