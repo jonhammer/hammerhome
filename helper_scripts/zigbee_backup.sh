@@ -1,1 +1,0 @@
-scp pi@zigbee:/opt/zigbee2mqtt/data/configuration.yaml /home/jon/zigbee_configuration.yaml
