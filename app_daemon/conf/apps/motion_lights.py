@@ -40,12 +40,8 @@ class MotionLight(HammerHass.HammerHass):
         timer_entity = f"timer.{room_name}_light_timer"
         light_entity = f"light.{room_name}_lights"
 
-        self.log("Motion event detected")
-        self.log("----------------------")
-        self.log(f"Entity_id: {data['entity_id']}")
-        self.log(f"Room: {room_name}")
-        self.log(f"Timer: {timer_entity}")
-        self.log(f"Entity: {light_entity}")
+        self.log("Motion event detected\n----------------------")
+        self.log(f"Entity ID: {data['entity_id']}\nRoom: {room_name}\nTimer: {timer_entity}\nEntity: {light_entity}")
 
         try:
             if self.is_in_override(room_name):
