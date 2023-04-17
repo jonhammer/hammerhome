@@ -72,8 +72,15 @@ class MotionLight(HammerHass.HammerHass):
             self.log(f"Turning on {light_entity} to brightness of {brightness}%")
             self.turn_on(light_entity, brightness_pct=brightness)
         else:
-            self.log(f"Turning on {light_entity}")
-            self.turn_on(light_entity)
+            # Check to see if the light is on before turning it on
+            # Normally we wouldn't care but excess zigbee traffic can cause issues for
+            # some devices (e.g., Sengled bulbs)
+            # TODO: Move this above brightness check, after we move away from birghtness_pct
+            # TODO: and check brightness as well.
+            if self.get_state(light_entity) == "off":
+                self.log(f"Turning on {light_entity}")
+                self.turn_on(light_entity)
+
         self.restart_home_assistant_timer(timer_entity)
 
         now = self.get_time()
