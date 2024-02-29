@@ -1,5 +1,6 @@
 import os
 from typing import Optional
+from datetime import timedelta
 
 import HammerHass
 
@@ -89,7 +90,7 @@ class MotionLight(HammerHass.HammerHass):
     def get_brightness(self, room_name: str, lights_data: dict) -> int:
         """Get brightness for a given room."""
         now = self.get_time()
-        last_trigger_time = self.LAST_TRIGGERED.get(room_name, now.replace(year=1970))
+        last_trigger_time = self.LAST_TRIGGERED.get(room_name, now - timedelta(days=1))
 
         current_part_of_day = self.get_part_of_day(now)
         last_triggered_part_of_day = self.get_part_of_day(last_trigger_time)
